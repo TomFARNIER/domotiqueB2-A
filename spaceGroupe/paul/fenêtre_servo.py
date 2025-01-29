@@ -2,7 +2,6 @@ from machine import Pin, PWM
 from time import sleep
 
 servo = PWM(Pin(26), freq=50)
-
 def porteOuverte():
     """
     Ouvre la porte en réglant le servo sur une position spécifique.
