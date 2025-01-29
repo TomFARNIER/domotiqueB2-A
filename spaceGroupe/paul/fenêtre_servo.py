@@ -2,7 +2,7 @@ from machine import Pin, PWM
 from time import sleep
 
 servo = PWM(Pin(26), freq=50)
-def porteOuverte():
+def openWindow():
     """
     Ouvre la porte en réglant le servo sur une position spécifique.
     Cette fonction ajuste le rapport cyclique (duty cycle) du servo à 70,
@@ -12,7 +12,7 @@ def porteOuverte():
     servo.duty(70)
     sleep(1)
     
-def porteFermee():
+def closeWindow():
     """
     Ferme la porte en réglant le servo sur une position spécifique.
     Cette fonction ajuste le rapport cyclique (duty cycle) du servo à 20,
