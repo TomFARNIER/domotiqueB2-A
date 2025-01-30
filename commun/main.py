@@ -22,39 +22,57 @@ def main():
     buzzer.arreter()
     fenetre.fermer()
     porte.fermer()
+    detecteurGaz.eteindre_led()
+    detecteurGaz.eteindre_ventilo()
+    porte.fermer()
+    fenetre.fermer()
 
-    if not rfid_check():
-        buzzer.on()
-        buzzer.rfid_pasbon()
-    else:
-        buzzer.rfid_bon()
-        loop = True
+    while True:
+        rfid_result = rfid_check()  # Attendez que rfid_check() renvoie 1 ou 0
+        if rfid_result == 1:
+            buzzer.rfid_bon()
+            loop = True
+            sleep(1)
+            break  # Sortez de la boucle si RFID est valide
+        elif rfid_result == 0:
+            buzzer.on()
+            buzzer.rfid_pasbon()
+            sleep(1)
+        else:
+            sleep(1)
 
-        while loop:
-            if boutonStop.est_presse():
-                loop = False
+    while loop:
+        if boutonStop.est_presse():
+            loop = False
+
+        if boutonOpen.est_presse():
+            porte.ouvrir()
+            fenetre.ouvrir()
 
 
-            if boutonOpen.est_presse():
-                porte.ouvrir()
-                fenetre.ouvrir()
+        if detectPression.lire_valeur():
+            buzzer.sonnette()
 
+        if capteurMouvement.getValeurCapteur():
+            capteurMouvement.mode_disco(5)
 
-            if detectPression.lire_valeur():
-                buzzer.sonnette()
-
-            if capteurMouvement.getValeurCapteur() == 1:
-                capteurMouvement.mode_disco(5)
-
-            if detecteurGaz.detecter_gaz():
-                detecteurGaz.allumer_led()
-                detecteurGaz.allumer_ventilo()
-            else:
-                detecteurGaz.eteindre_led()
-                detecteurGaz.eteindre_ventilo()
+        if detecteurGaz.detecter_gaz():
+            detecteurGaz.allumer_led()
+            detecteurGaz.allumer_ventilo()
+        else:
+            detecteurGaz.eteindre_led()
+            detecteurGaz.eteindre_ventilo()
 
 
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        while True:
+            main()
+            sleep(1)
+            if is_pressed('q'):
+                print("Program terminated gracefully by pressing 'q'.")
+                break
+    except KeyboardInterrupt:
+        print("Program terminated by user.")

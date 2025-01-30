@@ -23,6 +23,7 @@ class GazController:
         self.led_pin = Pin(ledpin, Pin.OUT)
         self.ventilo_pin = Pin(ventilopin, Pin.OUT)
 
+
     def allumer_led(self):
         """Allume la LED."""
         self.led_pin.on()

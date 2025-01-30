@@ -1,3 +1,5 @@
+from typing_extensions import override
+
 from __libs__ import sleep
 from commun.teamCode.servoMoteur import ServoMotor
 
@@ -32,6 +34,16 @@ class Porte(ServoMotor):
             sleep(1)
         return None
 
+    @property
+    def est_ouverte(self):
+        """
+        Vérifie si la porte est ouverte.
+
+        Returns:
+            bool: True si la porte est ouverte, False sinon.
+        """
+        return self.ouverte
+
     def fermer(self):
         """
         Ferme la porte si elle est ouverte.
@@ -44,3 +56,4 @@ class Porte(ServoMotor):
             self.ouverte = False
             sleep(1)
         return None
+

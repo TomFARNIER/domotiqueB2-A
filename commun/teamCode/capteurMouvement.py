@@ -60,11 +60,11 @@ class CapteurMouvement:
         sleep(1)
         return None
 
-    def getValeurCapteur(self) -> int:
+    def getValeurCapteur(self) -> bool:
         """
         Renvoie la valeur du capteur de mouvement.
 
         Returns:
             int: La valeur du capteur de mouvement (0 ou 1).
         """
-        return self.capteur.value()
+        return self.capteur.value() == 1
