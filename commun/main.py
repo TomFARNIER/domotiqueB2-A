@@ -13,6 +13,7 @@ def main():
     detecteurGaz = GazController(18, 19, 20)
     porte = Porte(17)
     detectPression = DetectPression(22)
+    rfid=RFIDReader(18,23,19,2,21,"0x5a3dafb6")
 
 
 
@@ -28,7 +29,7 @@ def main():
     fenetre.fermer()
 
     while True:
-        rfid_result = rfid_check()  # Attendez que rfid_check() renvoie 1 ou 0
+        rfid_result = rfid.rfidCheck()  # Attendez que rfid_check() renvoie 1 ou 0
         if rfid_result == 1:
             buzzer.rfid_bon()
             loop = True
