@@ -8,5 +8,6 @@ from .detectPression import DetectPression
 from time import sleep
 from keyboard import is_pressed
 from .rfidReader import RFIDReader
+from .lcd import LCDDisplay
 
-__all__ = ["Bouton", "Buzzer", "CapteurMouvement", "Fenetre", "GazController", "Porte", "DetectPression", "sleep","is_pressed","RFIDReader"]
+__all__ = ["Bouton", "Buzzer", "CapteurMouvement", "Fenetre", "GazController", "Porte", "DetectPression", "sleep","is_pressed","RFIDReader","LCDDisplay"]

@@ -105,3 +105,10 @@ class Buzzer:
         self.buzzer.duty(0)
         sleep(1)
         return None
+
+    def on(self):
+        """
+        Allume le buzzer.
+        """
+        self.buzzer.duty(20)
+        return None

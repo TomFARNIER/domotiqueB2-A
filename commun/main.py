@@ -13,7 +13,8 @@ def main():
     detecteurGaz = GazController(18, 19, 20)
     porte = Porte(17)
     detectPression = DetectPression(22)
-    rfid=RFIDReader(18,23,19,2,21,"0x5a3dafb6")
+    rfid=RFIDReader(18,23,13,2,21,"0x5a3dafb6")
+    lcd = LCDDisplay(0x27, 16, 2)
 
 
 
@@ -29,14 +30,16 @@ def main():
     fenetre.fermer()
 
     while True:
+        buzzer.on()
         rfid_result = rfid.rfidCheck()  # Attendez que rfid_check() renvoie 1 ou 0
         if rfid_result == 1:
+            lcd.afficher_rfid(True)
             buzzer.rfid_bon()
             loop = True
             sleep(1)
             break  # Sortez de la boucle si RFID est valide
         elif rfid_result == 0:
-            buzzer.on()
+            lcd.afficher_rfid(False)
             buzzer.rfid_pasbon()
             sleep(1)
         else:
@@ -47,6 +50,7 @@ def main():
             loop = False
 
         if boutonOpen.est_presse():
+            lcd.afficher_trou(True,True)
             porte.ouvrir()
             fenetre.ouvrir()
 
@@ -57,12 +61,17 @@ def main():
         if capteurMouvement.getValeurCapteur():
             capteurMouvement.mode_disco(5)
 
+
         if detecteurGaz.detecter_gaz():
             detecteurGaz.allumer_led()
             detecteurGaz.allumer_ventilo()
+            lcd.afficher_gas()
+            fenetre.fermer()
+            lcd.afficher_trou(False,True)
         else:
             detecteurGaz.eteindre_led()
             detecteurGaz.eteindre_ventilo()
+            lcd.clear()
 
 
 

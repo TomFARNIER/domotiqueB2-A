@@ -55,6 +55,6 @@ class GazController:
         Returns:
             bool: True si du gaz est détecté, False sinon.
         """
-        return self.gas_pin.value() == 0
+        return self.gas_pin.value() == 1
 
 
