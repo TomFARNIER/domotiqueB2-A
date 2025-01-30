@@ -5,16 +5,16 @@ def main():
     global loop
 
     # Initialisation des objets
-    boutonStop = Bouton(12)
-    boutonOpen = Bouton(13)
-    buzzer = Buzzer(21)
+    boutonStop = Bouton(5)
+    boutonOpen = Bouton(14)
+    buzzer = Buzzer(17)
     capteurMouvement = CapteurMouvement(14, 15, 10)
-    fenetre = Fenetre(16)
-    detecteurGaz = GazController(18, 19, 20)
-    porte = Porte(17)
-    detectPression = DetectPression(22)
-    rfid=RFIDReader(18,23,13,2,21,"0x5a3dafb6")
-    lcd = LCDDisplay(0x27, 16, 2)
+    fenetre = Fenetre(18)
+    detecteurGaz = GazController(25, 16, 20)
+    porte = Porte(27)
+    detectPression = DetectPression(26)
+    #rfid=RFIDReader(18,23,13,2,21,"0x5a3dafb6")
+    lcd = LCDDisplay( 22, 21)
 
 
 
@@ -29,6 +29,7 @@ def main():
     porte.fermer()
     fenetre.fermer()
 
+    """
     while True:
         buzzer.on()
         rfid_result = rfid.rfidCheck()  # Attendez que rfid_check() renvoie 1 ou 0
@@ -44,6 +45,7 @@ def main():
             sleep(1)
         else:
             sleep(1)
+    """
 
     while loop:
         if boutonStop.est_presse():
