@@ -44,7 +44,7 @@ def main():
                 buzzer.sonnette()
 
             if capteurMouvement.getValeurCapteur() == 1:
-                capteurMouvement.mode_discot(5)
+                capteurMouvement.mode_disco(5)
 
             if detecteurGaz.detecter_gaz():
                 detecteurGaz.allumer_led()
