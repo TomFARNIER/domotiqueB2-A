@@ -9,7 +9,7 @@ class Fenetre(ServoMotor):
         ouverte (bool): Indique si la fenêtre est ouverte ou fermée.
     """
 
-    def __init__(self, pin):
+    def __init__(self, pin:int):
         """
         Initialise la fenêtre avec le pin du servomoteur.
 
@@ -30,6 +30,7 @@ class Fenetre(ServoMotor):
             self.set_angle(70, 1)  # Ajustez l'angle pour ouvrir
             self.ouverte = True
         sleep(1)
+        return None
 
     def fermer(self):
         """
@@ -42,3 +43,4 @@ class Fenetre(ServoMotor):
             self.set_angle(20, 1)  # Ajustez l'angle pour fermer
             self.ouverte = False
         sleep(1)
+        return None

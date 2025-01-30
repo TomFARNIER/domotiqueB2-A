@@ -9,7 +9,7 @@ class ServoMotor:
         pwm (PWM): Objet PWM associé au servomoteur.
     """
 
-    def __init__(self, pin):
+    def __init__(self, pin:int):
         """
         Initialise le servomoteur.
 
@@ -19,7 +19,7 @@ class ServoMotor:
         self.servo_pin = Pin(pin)
         self.pwm = PWM(self.servo_pin, freq=50)
 
-    def set_angle(self, angle, sleep_time):
+    def set_angle(self, angle:int, sleep_time:float):
         """
         Définit l'angle du servomoteur.
 
@@ -28,7 +28,8 @@ class ServoMotor:
             sleep_time (float): Temps d'attente après le réglage de l'angle, en secondes.
         """
         duty = int((angle / 180) * 102 + 26)
-        self.pwm.duty(duty)
+        self.PWM.duty(duty)
         sleep(sleep_time)
+        return None
 
 

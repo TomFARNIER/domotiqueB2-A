@@ -1,3 +1,5 @@
+from idlelib.pyparse import trans
+
 from __libs__ import Pin, PWM, sleep
 
 # Définition des fréquences des notes en Hz
@@ -38,7 +40,7 @@ class Buzzer:
         buzzer (PWM): Instance du buzzer configurée avec PWM.
     """
 
-    def __init__(self, buzzer_pin):
+    def __init__(self, buzzer_pin : int):
         """
         Initialise et configure le buzzer avec PWM.
 
@@ -47,7 +49,7 @@ class Buzzer:
         """
         self.buzzer = PWM(Pin(buzzer_pin), freq=440, duty=0)
 
-    def jouer_note(self, note, duree):
+    def jouer_note(self, note , duree : float):
         """
         Joue une note sur le buzzer.
 
@@ -63,6 +65,8 @@ class Buzzer:
         else:
             sleep(duree)  # Silence
 
+        return None
+
     def sonnette(self):
         """
         Joue la mélodie de la sonnette prédéfinie.
@@ -70,6 +74,8 @@ class Buzzer:
         for note, duree in MELODIE_SONNETTE:
             self.jouer_note(note, duree)
             sleep(0.1)  # Pause entre les notes
+        sleep(1)
+        return None
 
     def rfid_bon(self):
         """
@@ -78,6 +84,9 @@ class Buzzer:
         for note, duree in MELODIE_RFID_BON:
             self.jouer_note(note, duree)
             sleep(0.05)  # Pause courte entre les notes
+        sleep(1)
+
+        return None
 
     def rfid_pasbon(self):
         """
@@ -86,9 +95,13 @@ class Buzzer:
         for note, duree in MELODIE_RFID_PASBON:
             self.jouer_note(note, duree)
             sleep(0.05)  # Pause courte entre les notes
+        sleep(1)
+        return None
 
     def arreter(self):
         """
         Arrête le buzzer.
         """
         self.buzzer.duty(0)
+        sleep(1)
+        return None

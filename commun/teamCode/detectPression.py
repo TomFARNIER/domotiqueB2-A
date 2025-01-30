@@ -1,3 +1,5 @@
+from time import sleep
+
 from __libs__ import ADC, Pin
 
 class DetectPression:
@@ -8,7 +10,7 @@ class DetectPression:
         adc (ADC): Instance de l'objet ADC configuré pour lire la valeur du capteur.
     """
 
-    def __init__(self, pin):
+    def __init__(self, pin: int):
         """
         Initialise et configure l'objet ADC pour un pin donné.
 
@@ -18,7 +20,7 @@ class DetectPression:
         self.adc = ADC(Pin(pin))
         self.adc.atten(ADC.ATTN_11DB)  # Plage de 0 à 3.3V pour ESP32
 
-    def lire_valeur(self):
+    def lire_valeur(self) -> bool:
         """
         Lit la valeur du capteur de pression.
 
@@ -31,5 +33,6 @@ class DetectPression:
         adc_val = self.adc.read()
         dac_val = round(adc_val * 255 / 4095)
         print(f"ADC Val: {adc_val}, \t DAC Val: {dac_val}")
+        sleep(1)
 
         return dac_val >= 40

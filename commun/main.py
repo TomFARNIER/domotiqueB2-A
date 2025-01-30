@@ -1,8 +1,8 @@
 from teamCode import *
 
 def main():
+    # Initialisation des variables
     global loop
-    sleep(10)
 
     # Initialisation des objets
     boutonStop = Bouton(12)
@@ -25,7 +25,6 @@ def main():
 
     if not rfid_check():
         buzzer.on()
-        sleep(3)
         buzzer.rfid_pasbon()
     else:
         buzzer.rfid_bon()
@@ -34,21 +33,20 @@ def main():
         while loop:
             if boutonStop.est_presse():
                 loop = False
-                sleep(1)
+
 
             if boutonOpen.est_presse():
                 porte.ouvrir()
                 fenetre.ouvrir()
-                sleep(1)
+
 
             if detectPression.lire_valeur():
                 buzzer.sonnette()
-                sleep(1)
 
             if capteurMouvement.getValeurCapteur() == 1:
                 capteurMouvement.mode_discot(5)
 
-            if detecteurGaz.detecter_gaz() == 1:
+            if detecteurGaz.detecter_gaz():
                 detecteurGaz.allumer_led()
                 detecteurGaz.allumer_ventilo()
             else:

@@ -10,7 +10,7 @@ class GazController:
         ventilo_pin (Pin): Pin du ventilateur à activer en cas de détection de gaz.
     """
 
-    def __init__(self, gazpin, ledpin, ventilopin):
+    def __init__(self, gazpin:int, ledpin:int, ventilopin:int):
         """
         Initialise le GazController avec les pins spécifiés.
 
@@ -26,32 +26,34 @@ class GazController:
     def allumer_led(self):
         """Allume la LED."""
         self.led_pin.on()
+        sleep(1)
+        return None
 
     def eteindre_led(self):
         """Éteint la LED."""
         self.led_pin.off()
+        sleep(1)
+        return None
 
     def allumer_ventilo(self):
         """Allume le ventilateur."""
         self.ventilo_pin.value(1)
+        sleep(1)
+        return None
 
     def eteindre_ventilo(self):
         """Éteint le ventilateur."""
         self.ventilo_pin.value(0)
+        sleep(1)
+        return None
 
-    def detecter_gaz(self):
+    def detecter_gaz(self) -> bool:
         """
-        Vérifie l'état du capteur de gaz et contrôle la LED et le ventilateur.
+        Vérifie si du gaz est détecté.
 
         Returns:
             bool: True si du gaz est détecté, False sinon.
         """
-        gas_val = self.gas_pin.value()
-        if gas_val == 1:  # Si du gaz est détecté
-            self.allumer_led()  # Allume la LED
-            self.allumer_ventilo()  # Allume le ventilateur
-            return True
-        else:  # Si aucun gaz n'est détecté
-            self.eteindre_led()  # Éteint la LED
-            self.eteindre_ventilo()  # Éteint le ventilateur
-            return False
+        return self.gas_pin.value() == 1
+
+

@@ -8,7 +8,7 @@ class Bouton:
         pin (Pin): Instance de Pin configurée pour le bouton.
     """
 
-    def __init__(self, pin):
+    def __init__(self, pin: int):
         """
         Initialise et configure l'objet Pin pour le bouton.
 
@@ -17,15 +17,11 @@ class Bouton:
         """
         self.pin = Pin(pin, Pin.IN, Pin.PULL_UP)
 
-    def est_presse(self):
+    def est_presse(self)->bool:
         """
         Vérifie si le bouton est pressé.
 
         Returns:
             bool: True si le bouton est pressé, False sinon.
         """
-        if self.pin.value() == 0:  # Si le bouton est pressé (valeur 0)
-            sleep(0.1)  # Anti-rebond
-            return True
-        sleep(0.1)  # Anti-rebond
-        return False
+        return self.pin.value() == 0

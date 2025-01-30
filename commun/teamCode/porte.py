@@ -9,7 +9,7 @@ class Porte(ServoMotor):
         ouverte (bool): Indique si la porte est ouverte ou fermée.
     """
 
-    def __init__(self, pin):
+    def __init__(self, pin:int):
         """
         Initialise la porte avec le pin du servomoteur.
 
@@ -30,6 +30,7 @@ class Porte(ServoMotor):
             self.set_angle(90, 1)  # Ajustez l'angle pour ouvrir
             self.ouverte = True
             sleep(1)
+        return None
 
     def fermer(self):
         """
@@ -42,3 +43,4 @@ class Porte(ServoMotor):
             self.set_angle(0, 1)  # Ajustez l'angle pour fermer
             self.ouverte = False
             sleep(1)
+        return None

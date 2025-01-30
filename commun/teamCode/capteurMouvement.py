@@ -9,7 +9,7 @@ class CapteurMouvement:
         led_rgb (NeoPixel): Instance des LEDs RGB contrôlées par le capteur.
     """
 
-    def __init__(self, capteur_mouvement_pin, led_rgb_pin, num_leds):
+    def __init__(self, capteur_mouvement_pin : int, led_rgb_pin : int , num_leds : int):
         """
         Initialise le capteur de mouvement et les LEDs RGB.
 
@@ -30,7 +30,7 @@ class CapteurMouvement:
         """
         return (randint(0, 255), randint(0, 255), randint(0, 255))
 
-    def mode_disco(self, duree=5):
+    def mode_disco(self, duree: float=5 ):
         """
         Fait clignoter les LED en mode disco pendant une durée donnée (en secondes).
 
@@ -41,9 +41,13 @@ class CapteurMouvement:
         while time() - start_time < duree:
             for i in range(len(self.led_rgb)):
                 self.led_rgb[i] = self.couleur_aleatoire()
+                sleep(0.1)
             self.led_rgb.write()
             sleep(0.2)
         self.eteindre_led_rgb()
+        sleep(1)
+
+        return None
 
     def eteindre_led_rgb(self):
         """
@@ -51,9 +55,12 @@ class CapteurMouvement:
         """
         for i in range(len(self.led_rgb)):
             self.led_rgb[i] = (0, 0, 0)
+            sleep(0.1)
         self.led_rgb.write()
+        sleep(1)
+        return None
 
-    def getValeurCapteur(self):
+    def getValeurCapteur(self) -> int:
         """
         Renvoie la valeur du capteur de mouvement.
 
